@@ -1,0 +1,39 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>drop_event</title>
+<style>
+#target{
+    width:500px; height:200px; margin:20px; background-color:#CCFF66; border:1px solid #00cc00;
+}
+</style>
+<script type="text/javascript">
+
+function onDragOver(event){
+    event.preventDefault();
+    console.log("onDragOver");
+}
+
+function onDrop(event){
+　　event.preventDefault();
+    console.log("onDrop");
+    var files = event.dataTransfer.files;
+    var files_info = "";
+    for(var i=0; i<files.length; i++){
+        files_info += "No" + (i+1) + "file_info:" + "<b>[name]</b> "
+        + files[i].name + " <b>[size]</b> " + files[i].size + " <b>[type]</b> "
+        + files[i].type + "<br>";
+    }
+    var msg = document.getElementById("msg");
+    msg.innerHTML = files_info;
+}
+</script>
+</head>
+<body>
+<div id="target" ondragover="onDragOver(event)" ondrop="onDrop(event)">
+Drag & Drop here on desktop file.
+</div>
+<div id="msg">message</div>
+</body>
+</html>
+
