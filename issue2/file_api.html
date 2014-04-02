@@ -1,0 +1,82 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>use_file_api</title>
+<style>
+    #target{
+        width:500px; height:200px; margin:20px; background-color:#CC6666; border:1px solid #00cc00;
+    }
+</style>
+<script type="text/javascript">
+// check for File API
+if(window.File){
+    window.alert("This browser can use File API!");
+}else{
+    window.alert("Sorry, this browser can't use File API.");
+}
+
+function onDragOver(event){
+    console.log("onDragOver");
+    event.preventDefault();
+}
+
+function onDrop(event){
+    console.log("onDrop");
+    event.preventDefault();
+
+    var files = event.dataTransfer.files;
+    var msg = document.getElementById("msg");
+    msg.innerHTML = "";
+
+    for(var i=0; i<files.length; i++){
+        var file = files[i];
+        // create FileReader Object
+        var reader = new FileReader();
+
+        // judge image or text file
+        if(!file.type.match('image.*') && !file.type.match('text.*')){
+            alert("You can drop here image or text file.");
+            continue;
+        }
+
+        // error dispose
+        reader.onerror = function(event){
+            msg.innerHTML = "read error occur."
+        }
+
+        // imageFile dispose
+        if(file.type.match('image.*')){
+            // call after image load finish
+            reader.onload = function(event){
+                var li = document.createElement("li");
+                var img = document.createElement("img");
+                img.src = event.target.result;
+                li.appendChild(img);
+                li.innerHTML += "<br>";
+                msg.appendChild(li);
+            }
+            // get file Data
+            reader.readAsDataURL(file);
+        }
+
+        // textFile dispose
+        if(file.type.match('text.*')){
+            // call after text load finish
+            reader.onload = function(event){
+                msg.innerHTML = reader.result;
+            }
+            // get file Data
+            reader.readAsText(file, 'utf-8');
+        }
+    }
+}
+</script>
+</head>
+<body>
+<div id="target" ondragover="onDragOver(event)" ondrop="onDrop(event)">
+Drag & Drop here your file on desktop.
+</div>
+<div id="msg"></div>
+</body>
+</html>
+
