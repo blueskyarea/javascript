@@ -13,10 +13,10 @@
 		// create object of gradation
 		var gr = ctx.createLinearGradient(0, 0, 500, 500);
 		gr.addColorStop(0, "white");	// start
-		gr.addColorStop(1, "blue");		// end
+		gr.addColorStop(1, "blue");	// end
 
+		ctx.fillStyle = gr;		// paint gradation
 		ctx.fillRect(0, 0, 500, 500);	// draw rectangle
-		ctx.fillStyle = gr;				// paint gradation
 
 	</script>
 </body>
