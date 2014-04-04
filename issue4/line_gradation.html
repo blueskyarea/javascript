@@ -1,0 +1,23 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>line gradation</title>
+</head>
+<body>
+	<canvas id="cv" width="500" height="500"></canvas>
+	<script type="text/javascript">
+		// get context
+		var cv = document.getElementById("cv");
+		var ctx = cv.getContext("2d");
+
+		// create object of gradation
+		var gr = ctx.createLinearGradient(0, 0, 500, 500);
+		gr.addColorStop(0, "white");	// start
+		gr.addColorStop(1, "blue");		// end
+
+		ctx.fillRect(0, 0, 500, 500);	// draw rectangle
+		ctx.fillStyle = gr;				// paint gradation
+
+	</script>
+</body>
+</html>
