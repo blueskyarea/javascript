@@ -1,0 +1,74 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>File Upload</title>
+	<style>
+		#target{
+			width:500px; height:500px; margin:20px; background-color:#FF00EE; border:1px solid #00cc00;
+		}
+	</style>
+	<script type="text/javascript">
+		if(!window.FileReader){
+			$("target").hide();
+		}
+		
+		// change background color when drag enter.
+		function onDragEnter(event){
+			console.log("onDragEnter");
+			event.preventDefault();
+			$("target").style.background = "#C0C0C0";
+		}
+		
+		// change background color when drag leave.
+		function onDragLeave(event){
+			console.log("onDragOver");
+			event.preventDefault();
+			$("target").style.background = "#FF00EE";
+		}
+		
+		// default event prevent
+		function onDragOver(event){
+			event.preventDefault();
+		}
+		
+		// upload dispose
+		function onDrop(event){
+			console.log("onDrop");
+			event.preventDefault();
+			
+			var files = event.dataTransfer.files;
+			var file = files[0];
+			
+			// create FileReader Object
+			var reader = new FileReader();
+			
+			// check image file or else
+			if(!file.type.match("image.*")){
+				alert("You can drop image file only.");
+				return;
+			}else{
+				// get file data
+				reader.readAsDataURL(file);
+
+				// call after image file load finish
+				reader.onload = function(event){
+					alert("image file loaded.");
+					$("target").style.background = "#FF00EE";
+				};
+			}
+			
+			// error dispose
+			reader.onerror = function(event){
+				alert("error occur");
+			};	
+		}
+		
+		function $(id){ return document.getElementById(id); }
+	</script>
+</head>
+<body>
+	<div id="target" ondragenter="onDragEnter(event)" ondragleave="onDragLeave(event)" ondragover="onDragOver(event)" ondrop="onDrop(event)">
+		Drag and Drop here your image file.
+	</div>
+</body>
+</html>
