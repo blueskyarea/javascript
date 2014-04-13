@@ -1,0 +1,19 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>自動でハイパーリンク</title>
+	<script type="text/javascript">
+		function autoLink(el){
+			document.getElementById("output-area").innerHTML = el.value.replace(/(http(s)?:\/\/[\x21-\x7e]+)/gi, "<a href='$1' target='_blank'>$1</a>");
+		}
+	</script>
+</head>
+<body>
+	<form>
+		<h3>ここに入力したURLが</h3>
+		<textarea id="input-area" name="input-area" rows="4" cols="50" onkeyup="autoLink(this)" onblur="autoLink(this)">ここにhttp://で始まるURLを入力してください。</textarea>
+		<h3>自動的にハイパーリンクとなって出力されます！</h3>
+		<div id="output-area" style="width:500px">ここに出力されます。</div>
+	</form>
+</body>
+</html>
