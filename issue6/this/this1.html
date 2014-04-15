@@ -1,0 +1,23 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>thisの使い方１：メソッドの呼び出し</title>
+	<script type="text/javascript">
+		var myObject = {
+			msg: "thisにはオブジェクトが入ります。",
+			show: function(){
+				alert(this.msg);
+			}
+		};
+		function test(){
+			myObject.show();
+		}
+	</script>
+</head>
+<body>
+	<h1>thisの使い方１：メソッドの呼び出し</h1>
+	<p>呼び出されたメソッドの中で thisを使った場合、thisにはそのメソッドを持つオブジェクトが入る。</p>
+	<p>例）myObject.show(); でshow()メソッド内でthisが使われたなら、thisにはmyObject が入る。</p>
+	<input type="button" value="click" onclick="test()">
+</body>
+</html>
