@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ボタンクリックのイベント処理</title>
+<script type="text/javascript" src="jquery-2.1.0.js"></script>
+<script type="text/javascript">
+function test1(){
+	var text1 = document.getElementById("box1").value;
+	alert(text1);
+}
+(function($){
+	$(document).ready(function () {
+		$("#button2").click(function () {
+			var text2 = $("#box2").val();
+			alert(text2);
+		});
+	});
+})(jQuery);
+</script>
+</head>
+<body>
+<h1>ボタンクリックのイベント処理</h1>
+<h2>jqueryなし</h2>
+<h3>１）onclickで関数を呼び出し、getElementByIdで要素を取得</h3>
+<input type="text" id="box1" size="15" maxlength="10" placeholder="テキストを入力">
+<input type="button" id="button1" value="テスト1" onclick="test1()">
+<h2>jqueryあり</h2>
+<h3>２）ボタンのクリックイベントをバインド</h3>
+<input type="text" id="box2" size="15" maxlength="10" placeholder="テキストを入力">
+<input type="button" id="button2" value="テスト2">
+</body>
+</html>
